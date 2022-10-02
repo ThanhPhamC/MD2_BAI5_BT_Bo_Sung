@@ -171,6 +171,7 @@ public class Menu {
                 }
             }
         }
+        System.out.println("Đã sắp xếp xong!");
     }
 
     //--------------Tìm kiếm sản phẩm theo tên sản phẩm------------------------------------

@@ -105,8 +105,20 @@ public class Product {
         Scanner sc = new Scanner(System.in);
         System.out.println("Mã sản phẩm:");
         this.productId = sc.nextLine();
+        for (int i = 0; i < Menu.indexProduct; i++) {
+            if (Menu.listProduct[i].getProductId().equals(this.productId)) {
+                System.err.println("Id đã tồn tại, hãy nhập Id mới: ");
+                this.productId = sc.nextLine();
+            }
+        }
         System.out.println("Tên sản phẩm:");
         this.productName = sc.nextLine();
+        for (int i = 0; i < Menu.indexProduct; i++) {
+            if (Menu.listProduct[i].getProductName().equals(this.productName)) {
+                System.err.println("Tên sản phẩm đã tồn tại, hãy nhập tên mới: ");
+                this.productName = sc.nextLine();
+            }
+        }
         System.out.println("Tiêu đề:");
         this.title = sc.nextLine();
         System.out.println("Giá sản phẩm:");
