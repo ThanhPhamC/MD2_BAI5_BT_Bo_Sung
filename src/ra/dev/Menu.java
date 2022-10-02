@@ -12,7 +12,7 @@ public class Menu {
     //****************************QUẢN LÝ DANH MỤC******************************
     public static void displayMenu1() {
         do {
-            System.out.println("+-----------------------------------------------------+");
+            System.out.println("\n+-----------------------------------------------------+");
             System.out.println("|                  QUẢN LÝ DANH MỤC                   |");
             System.out.println("+-----------------------------------------------------+");
             System.out.println("|    1. Nhập thông tin n danh mục.                    |");
@@ -22,8 +22,8 @@ public class Menu {
             System.out.println("|    3. Cập nhật thông tin danh mục theo ID.          |");
             System.out.println("+-----------------------------------------------------+");
             System.out.println("|    4. Thoát (Trở lại menu Quản lý cửa hàng).        |");
-            System.out.println("+-----------------------------------------------------+");
-            System.out.print("Lựa chọn của bạn là: ");
+            System.out.println("+-----------------------------------------------------+\n");
+            System.out.print("LỰA CHỌN CỦA BẠN LÀ: ");
             int choiceCatalog = Integer.parseInt(sc.nextLine());
             switch (choiceCatalog) {
                 case 1:
@@ -50,11 +50,13 @@ public class Menu {
             listCatalog[indexCatalog] = new Catalog();
             listCatalog[indexCatalog].inputData();
             indexCatalog++;
+            System.out.println("Thêm thành công!");
         }
     }
 
     //-------------------sắp xếp theo mức độ ưu tiên----------------------
     public static void showListCatalog() {
+        System.out.println("Hiện tại có " + indexCatalog + " danh mục.");
         Catalog temp;
         for (int i = 0; i < indexCatalog - 1; i++) {
             for (int j = i + 1; j < indexCatalog; j++) {
@@ -66,12 +68,11 @@ public class Menu {
             }
         }
         System.out.println("+------------------------------------------------------------------+");
-        System.out.printf("%-16s%-20s%-15s%-15s\n", "|   CatalogId", "|    CatalogName", "| Priority", "| CatalogStatus |");
+        System.out.printf("%-16s%-20s%-15s%-10s\n", "|   CatalogId", "|    CatalogName", "|   Priority", "| CatalogStatus |");
         for (int i = 0; i < indexCatalog; i++) {
             listCatalog[i].displayData();
         }
         System.out.println("+------------------------------------------------------------------+");
-
         for (int i = 0; i <= 5; i++) {
             System.out.println();
         }
@@ -79,17 +80,21 @@ public class Menu {
 
     //-----------------------Cập nhập thông tin theo mã danh mục---------------------
     public static void editListCatalog() {
-        System.out.print("Nhập mã danh mục muốn cập nhập: ");
-        int n = Integer.parseInt(sc.nextLine());
-        for (int i = 0; i < indexCatalog; i++) {
-            if (listCatalog[i].getCatalogId() == n) {
-                System.out.print("Tên cũ: \"" + listCatalog[i].getCatalogName() + "\"; Tên mới là: ");
-                listCatalog[i].setCatalogName(sc.nextLine());
-                System.out.print("Mức độ ưu tiên cũ: \"" + listCatalog[i].getPriority() + "\"; Mức độ mới là: ");
-                listCatalog[i].setPriority(Integer.parseInt(sc.nextLine()));
-                System.out.print("Trạng thái cũ: \"" + listCatalog[i].isCatalogStatus() + "\"; Trạng thái mới là: ");
-                listCatalog[i].setCatalogStatus(Boolean.parseBoolean(sc.nextLine()));
-                System.out.println("Cập nhập thành công");
+        if (indexCatalog == 0) {
+            System.err.println("Vui lòng tạo danh mục sản phẩm trước khi chỉnh sửa. ");
+        } else {
+            System.out.print("Nhập mã Id muốn cập nhập: ");
+            int n = Integer.parseInt(sc.nextLine());
+            for (int i = 0; i < indexCatalog; i++) {
+                if (listCatalog[i].getCatalogId() == n) {
+                    System.out.print("Tên cũ: \"" + listCatalog[i].getCatalogName() + "\"; Tên mới : ");
+                    listCatalog[i].setCatalogName(sc.nextLine());
+                    System.out.print("Mức độ ưu tiên cũ: \"" + listCatalog[i].getPriority() + "\"; Mức độ mới : ");
+                    listCatalog[i].setPriority(Integer.parseInt(sc.nextLine()));
+                    System.out.print("Trạng thái cũ: \"" + listCatalog[i].isCatalogStatus() + "\"; Trạng thái mới : ");
+                    listCatalog[i].setCatalogStatus(Boolean.parseBoolean(sc.nextLine()));
+                    System.out.println("Cập nhập thành công!");
+                }
             }
         }
     }
@@ -97,7 +102,7 @@ public class Menu {
     //********************QUẢN LÝ SẢN PHẨM*****************
     public static void displayMenu2() {
         do {
-            System.out.println("+-----------------------------------------------------+");
+            System.out.println("\n+-----------------------------------------------------+");
             System.out.println("|                  QUẢN LÝ SẢN PHẨM                   |");
             System.out.println("+-----------------------------------------------------+");
             System.out.println("|    1. Nhập thông tin cho n sản phẩm.                |");
@@ -115,7 +120,8 @@ public class Menu {
             System.out.println("|    7. Cập nhật trạng thái của sản phẩm theo Id.     |");
             System.out.println("+-----------------------------------------------------+");
             System.out.println("|    8. Thoát (Trở lại menu Quản lý cửa hàng).        |");
-            System.out.println("+-----------------------------------------------------+");
+            System.out.println("+-----------------------------------------------------+\n");
+            System.out.print("LỰA CHỌN CỦA BẠN LÀ: ");
             int choiceCase2 = Integer.parseInt(sc.nextLine());
             switch (choiceCase2) {
                 case 1:
@@ -148,7 +154,7 @@ public class Menu {
     //---------------------- add them san pham vao list----------------------
     public static void addProduct(Scanner sc) {
         if (indexCatalog == 0) {
-            System.out.println("Vui lòng tạo danh mục sản phẩm trước khi thêm sản phẩm ");
+            System.out.println("Vui lòng tạo danh mục sản phẩm trước khi thêm sản phẩm. ");
 //            addCatalog(sc);
 //            System.out.printf("%-20s%-20s\n","CatalogId","CatalogName");
 //            for (int i = 0; i < indexCatalog; i++) {
@@ -156,16 +162,20 @@ public class Menu {
 //            }
             return;
         } else {
-            System.out.printf("%-20s%-20s\n", "CatalogId", "CatalogName");
+            System.out.println("\n+----------------------------------------+");
+            System.out.printf("%-20s %-20s\n", "|     CatalogId", "|    CatalogName    |");
+            System.out.println("+----------------------------------------+");
             for (int i = 0; i < indexCatalog; i++) {
-                System.out.printf("%-20d%-20s\n", listCatalog[i].getCatalogId(), listCatalog[i].getCatalogName());
+                System.out.printf("|          %-10d|    %-15s|\n", listCatalog[i].getCatalogId(), listCatalog[i].getCatalogName());
             }
+            System.out.println("+----------------------------------------+\n");
+
             System.out.println("Nhập ID của catalog muốn thêm sản phẩm: ");
             int idinput = Integer.parseInt(sc.nextLine());
             boolean checkpoint = true;
             for (int i = 0; i < indexCatalog; i++) {
                 if (listCatalog[i].getCatalogId() == idinput) {
-                    System.out.println("Nhập số lượng sản phẩm muốn thêm vào danh mục " + listCatalog[i].getCatalogName());
+                    System.out.print("Nhập số lượng sản phẩm muốn thêm vào danh mục \"" + listCatalog[i].getCatalogName()+"\": ");
                     int count = Integer.parseInt(sc.nextLine());
                     for (int j = 0; j < count; j++) {
                         System.out.println("Nhập thông tin của sản phẩm " + (j + 1));
@@ -187,19 +197,22 @@ public class Menu {
     //-----------------------tinh gia cho cac san pham-------------------------
     public static void calExportPriceListProduct() {
         if (indexProduct == 0) {
-            System.out.println("Vui lòng thêm sản phẩm trước khi tính giá");
+            System.out.println("Vui lòng thêm sản phẩm trước khi tính giá.");
         } else {
             for (int i = 0; i < indexProduct; i++) {
                 listProduct[i].calExportPrice();
             }
-            System.out.println("Đã tính xong giá cho các sản phẩm");
+            System.out.println("Đã tính xong giá cho các sản phẩm.");
         }
     }
 
     //------------------------hien thi cac san pham---------------------------------
     public static void showListproduct() {
-        System.out.printf("%-15s%-20s%-15s%-15s%-15s%-10s%-20s%-15s%-15s\n", "ProductId", "ProductName", "Title", "ImportPrice",
+        System.out.println("\n+----------------------------------------------------------------------------------------------------------------------------------------------------+");
+        System.out.printf("|   %-12s|     %-15s|     %-10s|  %-13s|  %-13s| %-9s|    %-16s| %-14s|    %-11s|\n", "ProductId", "ProductName", "Title", "ImportPrice",
                 "ExportPrice", "Quantity", "Descriptions", "ProductStatus", "Catalog");
+        System.out.println("+----------------------------------------------------------------------------------------------------------------------------------------------------+");
+
         for (int i = 0; i < indexProduct; i++) {
             listProduct[i].displayData();
         }
@@ -208,8 +221,8 @@ public class Menu {
     //--------------------sap xep theo gia ban tang dan---------------------------------
     public static void sortlistProduct() {
         if (indexProduct == 0) {
-            System.out.println("Vui lòng thêm sản phẩm trước khi sắp xếp");}
-        else{
+            System.out.println("Vui lòng thêm sản phẩm trước khi sắp xếp.");
+        } else {
             Product temp;
             for (int i = 0; i < indexProduct - 1; i++) {
                 for (int j = i + 1; j < indexProduct; j++) {
@@ -226,15 +239,21 @@ public class Menu {
 
     //--------------Tìm kiếm sản phẩm theo tên sản phẩm------------------------------------
     public static void searchListproduct() {
+        int count=0;
         System.out.print("Nhập tên sản phẩm muốn tìm kiếm: ");
         String inputSearch = sc.nextLine();
-        System.out.printf("%-15s%-20s%-15s%-15s%-15s%-10s%-20s%-15s%-15s\n", "ProductId", "ProductName", "Title", "ImportPrice",
+        System.out.println("\n+----------------------------------------------------------------------------------------------------------------------------------------------------+");
+        System.out.printf("|   %-12s|     %-15s|     %-10s|  %-13s|  %-13s| %-9s|    %-16s| %-14s|    %-11s|\n", "ProductId", "ProductName", "Title", "ImportPrice",
                 "ExportPrice", "Quantity", "Descriptions", "ProductStatus", "Catalog");
+        System.out.println("+----------------------------------------------------------------------------------------------------------------------------------------------------+");
+
         for (int i = 0; i < indexProduct; i++) {
             if (listProduct[i].getProductName().startsWith(inputSearch)) {
                 listProduct[i].displayData();
+                count++;
             }
-        }
+        } System.out.println("Tìm thấy "+count+ " sản phẩm.");
+
     }
 
     //------------------Thống kê số lượng và in thông tin các sản phẩm sắp hết hàng (quantity<=5)-------------
@@ -255,18 +274,19 @@ public class Menu {
     public static void updateProductStatus() {
         System.out.println("Nhập Id sản phẩm muốn update: ");
         String inputID = sc.nextLine();
-        boolean checkpoint=false;
+        boolean checkpoint = false;
         for (int i = 0; i < indexProduct; i++) {
             if (listProduct[i].getProductId().equals(inputID)) {
                 listProduct[i].setProductStatus(!listProduct[i].isProductStatus());
                 System.out.println("Đã cập nhập trạng thái thành công !");
-                checkpoint=false;
+                checkpoint = false;
                 break;
-            }else {
-                checkpoint=true;
+            } else {
+                checkpoint = true;
             }
-        }if (checkpoint){
-            System.out.println("Id không tồn tại");
+        }
+        if (checkpoint) {
+            System.out.println("Id không tồn tại.");
         }
     }
 }

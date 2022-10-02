@@ -74,6 +74,6 @@ public class Catalog {
     }
     public void displayData(){
         System.out.println("+------------------------------------------------------------------+");
-        System.out.printf("| %-15d| %-20s| %-15d| %-15b|\n",this.catalogId,this.catalogName,this.priority,this.catalogStatus);
+        System.out.printf("| %-14d| %-18s| %-13d| %-14b|\n",this.catalogId,this.catalogName,this.priority,this.catalogStatus);
     }
 }

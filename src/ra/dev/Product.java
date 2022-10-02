@@ -136,9 +136,9 @@ public class Product {
     }
 
     public void displayData() {
-
-        System.out.printf("%-15s%-20s%-15s%-15f%-15f%-10d%-20s%-15b%-15s\n", this.productId, this.productName, this.title, this.importPrice,
+        System.out.printf("|   %-12s|     %-15s|     %-10s|  %-13s|  %-13s| %-9s|    %-16s| %-14s|    %-11s|\n", this.productId, this.productName, this.title, this.importPrice,
                 this.exportPrice, this.quantity, this.descriptions, this.productStatus, this.catalog.catalogName);
+        System.out.println("+----------------------------------------------------------------------------------------------------------------------------------------------------+\n");
     }
 }
 
