@@ -73,6 +73,7 @@ public class Catalog {
         this.catalogStatus=Boolean.parseBoolean(sc.nextLine());
     }
     public void displayData(){
-        System.out.printf("%-15d%-20s%-15d%-15b\n",this.catalogId,this.catalogName,this.priority,this.catalogStatus);
+        System.out.println("+------------------------------------------------------------------+");
+        System.out.printf("| %-15d| %-20s| %-15d| %-15b|\n",this.catalogId,this.catalogName,this.priority,this.catalogStatus);
     }
 }

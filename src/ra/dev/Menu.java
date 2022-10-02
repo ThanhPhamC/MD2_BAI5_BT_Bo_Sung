@@ -12,11 +12,17 @@ public class Menu {
     //****************************QUẢN LÝ DANH MỤC******************************
     public static void displayMenu1() {
         do {
-            System.out.println("********************QUẢN LÝ DANH MỤC*****************");
-            System.out.println("1. Nhập thông tin n danh mục");
-            System.out.println("2. Hiển thị thông tin danh mục theo độ ưu tiên");
-            System.out.println("3. Cập nhật thông tin danh mục theo mã danh mục");
-            System.out.println("4. Thoát (Trở lại menu Quản lý cửa hàng)");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|                  QUẢN LÝ DANH MỤC                   |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    1. Nhập thông tin n danh mục.                    |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    2. Hiển thị thông tin danh mục theo độ ưu tiên.  |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    3. Cập nhật thông tin danh mục theo ID.          |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    4. Thoát (Trở lại menu Quản lý cửa hàng).        |");
+            System.out.println("+-----------------------------------------------------+");
             System.out.print("Lựa chọn của bạn là: ");
             int choiceCatalog = Integer.parseInt(sc.nextLine());
             switch (choiceCatalog) {
@@ -59,9 +65,15 @@ public class Menu {
                 }
             }
         }
-        System.out.printf("%-15s%-20s%-15s%-15s\n", "CatalogId", "CatalogName", "Priority", "CatalogStatus");
+        System.out.println("+------------------------------------------------------------------+");
+        System.out.printf("%-16s%-20s%-15s%-15s\n", "|   CatalogId", "|    CatalogName", "| Priority", "| CatalogStatus |");
         for (int i = 0; i < indexCatalog; i++) {
             listCatalog[i].displayData();
+        }
+        System.out.println("+------------------------------------------------------------------+");
+
+        for (int i = 0; i <= 5; i++) {
+            System.out.println();
         }
     }
 
@@ -71,11 +83,11 @@ public class Menu {
         int n = Integer.parseInt(sc.nextLine());
         for (int i = 0; i < indexCatalog; i++) {
             if (listCatalog[i].getCatalogId() == n) {
-                System.out.print("Tên cũ: (" + listCatalog[i].getCatalogName() + "); Tên mới là: ");
+                System.out.print("Tên cũ: \"" + listCatalog[i].getCatalogName() + "\"; Tên mới là: ");
                 listCatalog[i].setCatalogName(sc.nextLine());
-                System.out.print("Mức độ ưu tiên cũ: (" + listCatalog[i].getPriority() + "); Mức độ mới là: ");
+                System.out.print("Mức độ ưu tiên cũ: \"" + listCatalog[i].getPriority() + "\"; Mức độ mới là: ");
                 listCatalog[i].setPriority(Integer.parseInt(sc.nextLine()));
-                System.out.print("Trạng thái cũ: (" + listCatalog[i].isCatalogStatus() + "); Trạng thái mới là: ");
+                System.out.print("Trạng thái cũ: \"" + listCatalog[i].isCatalogStatus() + "\"; Trạng thái mới là: ");
                 listCatalog[i].setCatalogStatus(Boolean.parseBoolean(sc.nextLine()));
                 System.out.println("Cập nhập thành công");
             }
@@ -85,15 +97,25 @@ public class Menu {
     //********************QUẢN LÝ SẢN PHẨM*****************
     public static void displayMenu2() {
         do {
-            System.out.println("********************QUẢN LÝ SẢN PHẨM*****************");
-            System.out.println("1. Nhập thông tin cho n sản phẩm");
-            System.out.println("2. Tính giá bán cho tất cả sản phẩm");
-            System.out.println("3. Hiển thị thông tin các sản phẩm");
-            System.out.println("4. Sắp xếp sản phẩm theo giá bán tăng dần");
-            System.out.println("5. Tìm kiếm sản phẩm theo tên sản phẩm");
-            System.out.println("6. Thống kê số lượng và in thông tin các sản phẩm sắp hết hàng (quantity<=5)");
-            System.out.println("7. Cập nhật trạng thái của sản phẩm theo mã sản phẩm");
-            System.out.println("8. Thoát (Trở lại menu Quản lý cửa hàng)");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|                  QUẢN LÝ SẢN PHẨM                   |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    1. Nhập thông tin cho n sản phẩm.                |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    2. Tính giá bán cho tất cả sản phẩm.             |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    3. Hiển thị thông tin các sản phẩm.              |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    4. Sắp xếp sản phẩm theo giá bán tăng dần.       |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    5. Tìm kiếm sản phẩm theo tên sản phẩm.          |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    6. Thống kê sản phẩm sắp hết hàng (quantity<=5). |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    7. Cập nhật trạng thái của sản phẩm theo Id.     |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    8. Thoát (Trở lại menu Quản lý cửa hàng).        |");
+            System.out.println("+-----------------------------------------------------+");
             int choiceCase2 = Integer.parseInt(sc.nextLine());
             switch (choiceCase2) {
                 case 1:
