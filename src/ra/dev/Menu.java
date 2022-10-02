@@ -132,6 +132,7 @@ public class Menu {
                 System.out.println("Nhập số lượng sản phẩm muốn thêm vào danh mục " + listCatalog[i].getCatalogName());
                 int count = Integer.parseInt(sc.nextLine());
                 for (int j = 0; j < count; j++) {
+                    System.out.println("Nhập thông tin của sản phẩm "+ (i+1));
                     listProduct[indexProduct] = new Product();
                     listProduct[indexProduct].inputData();
                     listProduct[indexProduct].setCatalog(listCatalog[i]);
