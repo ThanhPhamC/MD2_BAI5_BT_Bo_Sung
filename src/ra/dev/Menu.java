@@ -37,10 +37,10 @@ public class Menu {
 
     // ---------------------thêm danh mục-------------------
     public static void addCatalog(Scanner sc) {
-        System.out.print("Nhập số lượng muốn thêm: ");
+        System.out.print("Nhập số lượng catalog muốn thêm: ");
         int n = Integer.parseInt(sc.nextLine());
         for (int i = 0; i < n; i++) {
-            System.out.println("Danh mục thứ: " + (i + 1));
+            System.out.println("Catalog: " + (i + 1));
             listCatalog[indexCatalog] = new Catalog();
             listCatalog[indexCatalog].inputData();
             indexCatalog++;
@@ -125,31 +125,54 @@ public class Menu {
 
     //---------------------- add them san pham vao list----------------------
     public static void addProduct(Scanner sc) {
-        System.out.println("Nhập ID của catalog muốn thêm sản phẩm: ");
-        int idinput = Integer.parseInt(sc.nextLine());
-        for (int i = 0; i < indexCatalog; i++) {
-            if (listCatalog[i].getCatalogId() == idinput) {
-                System.out.println("Nhập số lượng sản phẩm muốn thêm vào danh mục " + listCatalog[i].getCatalogName());
-                int count = Integer.parseInt(sc.nextLine());
-                for (int j = 0; j < count; j++) {
-                    System.out.println("Nhập thông tin của sản phẩm "+ (i+1));
-                    listProduct[indexProduct] = new Product();
-                    listProduct[indexProduct].inputData();
-                    listProduct[indexProduct].setCatalog(listCatalog[i]);
-                    indexProduct++;
+        if (indexCatalog == 0) {
+            System.out.println("Vui lòng tạo danh mục sản phẩm trước khi thêm sản phẩm ");
+//            addCatalog(sc);
+//            System.out.printf("%-20s%-20s\n","CatalogId","CatalogName");
+//            for (int i = 0; i < indexCatalog; i++) {
+//                System.out.printf("%-20d%-20s\n",listCatalog[i].getCatalogId(),listCatalog[i].getCatalogName());
+//            }
+            return;
+        } else {
+            System.out.printf("%-20s%-20s\n", "CatalogId", "CatalogName");
+            for (int i = 0; i < indexCatalog; i++) {
+                System.out.printf("%-20d%-20s\n", listCatalog[i].getCatalogId(), listCatalog[i].getCatalogName());
+            }
+            System.out.println("Nhập ID của catalog muốn thêm sản phẩm: ");
+            int idinput = Integer.parseInt(sc.nextLine());
+            boolean checkpoint = true;
+            for (int i = 0; i < indexCatalog; i++) {
+                if (listCatalog[i].getCatalogId() == idinput) {
+                    System.out.println("Nhập số lượng sản phẩm muốn thêm vào danh mục " + listCatalog[i].getCatalogName());
+                    int count = Integer.parseInt(sc.nextLine());
+                    for (int j = 0; j < count; j++) {
+                        System.out.println("Nhập thông tin của sản phẩm " + (j + 1));
+                        listProduct[indexProduct] = new Product();
+                        listProduct[indexProduct].inputData();
+                        listProduct[indexProduct].setCatalog(listCatalog[i]);
+                        indexProduct++;
+                    }
+                } else {
+                    checkpoint = false;
                 }
+            }
+            if (!checkpoint) {
+                System.out.println("catalog với Id " + idinput + " chưa được khởi tạo!\nVui lòng khởi tạo catalog với Id mới hoặc chọn catalog với Id đã tồn tại.");
             }
         }
     }
 
     //-----------------------tinh gia cho cac san pham-------------------------
     public static void calExportPriceListProduct() {
-        for (int i = 0; i < indexProduct; i++) {
-            listProduct[i].calExportPrice();
+        if (indexProduct == 0) {
+            System.out.println("Vui lòng thêm sản phẩm trước khi tính giá");
+        } else {
+            for (int i = 0; i < indexProduct; i++) {
+                listProduct[i].calExportPrice();
+            }
+            System.out.println("Đã tính xong giá cho các sản phẩm");
         }
-        System.out.println("Đã tính xong giá cho các sản phẩm");
     }
-
 
     //------------------------hien thi cac san pham---------------------------------
     public static void showListproduct() {
@@ -162,17 +185,21 @@ public class Menu {
 
     //--------------------sap xep theo gia ban tang dan---------------------------------
     public static void sortlistProduct() {
-        Product temp;
-        for (int i = 0; i < indexProduct - 1; i++) {
-            for (int j = i + 1; j < indexProduct; j++) {
-                if (listProduct[i].getExportPrice() > listProduct[j].getExportPrice()) {
-                    temp = listProduct[i];
-                    listProduct[i] = listProduct[j];
-                    listProduct[j] = temp;
+        if (indexProduct == 0) {
+            System.out.println("Vui lòng thêm sản phẩm trước khi sắp xếp");}
+        else{
+            Product temp;
+            for (int i = 0; i < indexProduct - 1; i++) {
+                for (int j = i + 1; j < indexProduct; j++) {
+                    if (listProduct[i].getExportPrice() > listProduct[j].getExportPrice()) {
+                        temp = listProduct[i];
+                        listProduct[i] = listProduct[j];
+                        listProduct[j] = temp;
+                    }
                 }
             }
+            System.out.println("Đã sắp xếp xong!");
         }
-        System.out.println("Đã sắp xếp xong!");
     }
 
     //--------------Tìm kiếm sản phẩm theo tên sản phẩm------------------------------------
@@ -187,28 +214,37 @@ public class Menu {
             }
         }
     }
+
     //------------------Thống kê số lượng và in thông tin các sản phẩm sắp hết hàng (quantity<=5)-------------
-    public static void countlistProduct(){
-        int count=0;
+    public static void countlistProduct() {
+        int count = 0;
         System.out.printf("%-15s%-20s%-15s%-15s%-15s%-10s%-20s%-15s%-15s\n", "ProductId", "ProductName", "Title", "ImportPrice",
                 "ExportPrice", "Quantity", "Descriptions", "ProductStatus", "Catalog");
         for (int i = 0; i < indexProduct; i++) {
-            if (listProduct[i].getQuantity()<=5){
+            if (listProduct[i].getQuantity() <= 5) {
                 listProduct[i].displayData();
                 count++;
             }
         }
-        System.out.println(" số lượng sản phẩm sắp hết hàng là: "+count );
+        System.out.println(" số lượng sản phẩm sắp hết hàng là: " + count);
     }
+
     //---------------Cập nhật trạng thái của sản phẩm theo mã sản phẩm--------------------------
-    public static void updateProductStatus(){
+    public static void updateProductStatus() {
         System.out.println("Nhập Id sản phẩm muốn update: ");
-        String inputID=sc.nextLine();
+        String inputID = sc.nextLine();
+        boolean checkpoint=false;
         for (int i = 0; i < indexProduct; i++) {
-            if (listProduct[i].getProductId().equals(inputID)){
+            if (listProduct[i].getProductId().equals(inputID)) {
                 listProduct[i].setProductStatus(!listProduct[i].isProductStatus());
+                System.out.println("Đã cập nhập trạng thái thành công !");
+                checkpoint=false;
+                break;
+            }else {
+                checkpoint=true;
             }
+        }if (checkpoint){
+            System.out.println("Id không tồn tại");
         }
-        System.out.println("Đã cập nhập trạng thái thành công !");
     }
 }
