@@ -37,6 +37,8 @@ public class Menu {
                     break;
                 case 4:
                     return;
+                default:
+                    System.out.println(" Vui lòng chọn trong khoảng 1-4");
             }
         } while (true);
     }
@@ -147,6 +149,9 @@ public class Menu {
                     break;
                 case 8:
                     return;
+                default:
+                    System.out.println(" Vui lòng chọn trong khoảng 1-8");
+
             }
         } while (true);
     }
@@ -175,7 +180,7 @@ public class Menu {
             boolean checkpoint = true;
             for (int i = 0; i < indexCatalog; i++) {
                 if (listCatalog[i].getCatalogId() == idinput) {
-                    System.out.print("Nhập số lượng sản phẩm muốn thêm vào danh mục \"" + listCatalog[i].getCatalogName()+"\": ");
+                    System.out.print("Nhập số lượng sản phẩm muốn thêm vào danh mục \"" + listCatalog[i].getCatalogName() + "\": ");
                     int count = Integer.parseInt(sc.nextLine());
                     for (int j = 0; j < count; j++) {
                         System.out.println("Nhập thông tin của sản phẩm " + (j + 1));
@@ -239,7 +244,7 @@ public class Menu {
 
     //--------------Tìm kiếm sản phẩm theo tên sản phẩm------------------------------------
     public static void searchListproduct() {
-        int count=0;
+        int count = 0;
         System.out.print("Nhập tên sản phẩm muốn tìm kiếm: ");
         String inputSearch = sc.nextLine();
         System.out.println("\n+----------------------------------------------------------------------------------------------------------------------------------------------------+");
@@ -252,7 +257,8 @@ public class Menu {
                 listProduct[i].displayData();
                 count++;
             }
-        } System.out.println("Tìm thấy "+count+ " sản phẩm.");
+        }
+        System.out.println("Tìm thấy " + count + " sản phẩm.");
 
     }
 
