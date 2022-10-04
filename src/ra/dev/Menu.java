@@ -74,10 +74,7 @@ public class Menu {
         for (int i = 0; i < indexCatalog; i++) {
             listCatalog[i].displayData();
         }
-        System.out.println("+------------------------------------------------------------------+");
-        for (int i = 0; i <= 5; i++) {
-            System.out.println();
-        }
+        System.out.println("+------------------------------------------------------------------+\n\n\n");
     }
 
     //-----------------------Cập nhập thông tin theo mã danh mục---------------------
@@ -121,7 +118,11 @@ public class Menu {
             System.out.println("+-----------------------------------------------------+");
             System.out.println("|    7. Cập nhật trạng thái của sản phẩm theo Id.     |");
             System.out.println("+-----------------------------------------------------+");
-            System.out.println("|    8. Thoát (Trở lại menu Quản lý cửa hàng).        |");
+            System.out.println("|    8. Bán hàng.                                     |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    9. Nhập hàng.                                    |");
+            System.out.println("+-----------------------------------------------------+");
+            System.out.println("|    10. Thoát (Trở lại menu Quản lý cửa hàng).       |");
             System.out.println("+-----------------------------------------------------+\n");
             System.out.print("LỰA CHỌN CỦA BẠN LÀ: ");
             int choiceCase2 = Integer.parseInt(sc.nextLine());
@@ -148,9 +149,14 @@ public class Menu {
                     updateProductStatus();
                     break;
                 case 8:
+                    SaleProduct();
+                    break;
+                case 9:
+                    break;
+                case 10:
                     return;
                 default:
-                    System.out.println(" Vui lòng chọn trong khoảng 1-8");
+                    System.out.println(" Vui lòng chọn trong khoảng 1-10");
 
             }
         } while (true);
@@ -160,12 +166,6 @@ public class Menu {
     public static void addProduct(Scanner sc) {
         if (indexCatalog == 0) {
             System.out.println("Vui lòng tạo danh mục sản phẩm trước khi thêm sản phẩm. ");
-//            addCatalog(sc);
-//            System.out.printf("%-20s%-20s\n","CatalogId","CatalogName");
-//            for (int i = 0; i < indexCatalog; i++) {
-//                System.out.printf("%-20d%-20s\n",listCatalog[i].getCatalogId(),listCatalog[i].getCatalogName());
-//            }
-            return;
         } else {
             System.out.println("\n+----------------------------------------+");
             System.out.printf("%-20s %-20s\n", "|     CatalogId", "|    CatalogName    |");
@@ -294,5 +294,35 @@ public class Menu {
         if (checkpoint) {
             System.out.println("Id không tồn tại.");
         }
+
     }
+    //-------------------------- ban san pham---------------------------------------
+public static void SaleProduct(){
+    System.out.println("Nhập tên sản phẩm muốn bán: ");
+    String inputName= sc.nextLine();
+    for (int i = 0; i <indexProduct; i++) {
+        if (listProduct[i].getProductName().equals(inputName)){
+            System.out.println("Nhập số lượng sản phẩm muốn bán: ");
+            int inputQuatity=Integer.parseInt(sc.nextLine());
+            while (inputQuatity<0|| inputQuatity>listProduct[i].getQuantity()){
+                System.out.println("Nhập sai số lượng, vui lòng nhập trong khoảng \"1- "+listProduct[i].getQuantity()+"\":");
+                 inputQuatity=Integer.parseInt(sc.nextLine());
+            }
+            listProduct[i].setQuantity(listProduct[i].getQuantity()-inputQuatity);
+            break;
+        }else {
+            System.out.println("Vui lòng chọn lại. ");
+            Menu.SaleProduct();
+            break;
+        }
+    }
+}
+//------check vali rong-------------------------
+//    public static void checkVali(){
+//        String inputvalue = sc.nextLine();
+//        while (inputvalue.trim().length()==0) {
+//            System.err.print("Không được để trống, hãy nhập lại: ");
+//            inputvalue = sc.nextLine();
+//        }
+//    }
 }

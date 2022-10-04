@@ -105,23 +105,18 @@ public class Product {
         Scanner sc = new Scanner(System.in);
         System.out.println("Mã sản phẩm:");
         this.productId = sc.nextLine();
-        boolean checkvaliIP = true;
-        while (checkvaliIP) {
-            if (this.productId.trim().length() == 0) {
+        while (this.productId.trim().length() == 0) {
                 System.err.println("Không được để trống ID, mời nhập lại: ");
                 this.productId = sc.nextLine();
-            } else {
-                checkvaliIP = false;
-            }
         }
         if (Menu.indexProduct != 0) {
             boolean checkpoint = true;
             while (checkpoint) {
                 for (int i = 0; i < Menu.indexProduct; i++) {
-                    if (Menu.listProduct[i].getProductId().equals(this.productId)) {
-                        System.err.println("Id đã tồn tại, hãy nhập Id mới: ");
+                    if (Menu.listProduct[i].getProductId().equals(this.productId ) || this.productId.trim().length() == 0 ) {
+                        System.err.println("Id đã tồn tại hoặc để trống, hãy nhập Id mới: ");
                         this.productId = sc.nextLine();
-                        checkpoint = true;
+                        break;
                     } else {
                         checkpoint = false;
                     }
@@ -129,21 +124,16 @@ public class Product {
             }
         }
         System.out.println("Tên sản phẩm:");
-        this.productName = sc.nextLine();
-        boolean checkvaliName = true;
-        while (checkvaliName) {
-            if (this.productName.trim().length() == 0) {
+        this.productName=sc.nextLine();
+        while (this.productName.trim().length() == 0) {
                 System.err.println("Không được để trống Name, mời nhập lại: ");
                 this.productName = sc.nextLine();
-            } else {
-                checkvaliName = false;
-            }
         }
         if (Menu.indexProduct != 0) {
             boolean checkpoint = true;
             while (checkpoint) {
                 for (int i = 0; i < Menu.indexProduct; i++) {
-                    if (Menu.listProduct[i].getProductName().equals(this.productName)) {
+                    if (Menu.listProduct[i].getProductName().equals(this.productName)||this.productName.trim().length() == 0 ) {
                         System.err.println("Tên sản phẩm đã tồn tại, hãy nhập tên mới: ");
                         this.productName = sc.nextLine();
                         break;
@@ -153,37 +143,37 @@ public class Product {
                 }
             }
         }
-            System.out.println("Tiêu đề:");
-            this.title = sc.nextLine();
-            System.out.println("Giá sản phẩm:");
-            String inputPrice=sc.nextLine();
-            boolean checkPrice=true;
-            while (checkPrice){
-                if (inputPrice.trim().length()==0||Float.parseFloat(inputPrice)==0){
-                    System.err.println("Không được để trống và giá phải khác \"0\",hãy nhập lại: ");
-                    inputPrice=sc.nextLine();
-                }else{
-                    checkPrice=false;
-                }
+        System.out.println("Tiêu đề:");
+        this.title = sc.nextLine();
+        System.out.println("Giá sản phẩm:");
+        String inputPrice = sc.nextLine();
+        boolean checkPrice = true;
+        while (checkPrice) {
+            if (inputPrice.trim().length() == 0 || Float.parseFloat(inputPrice) == 0) {
+                System.err.println("Không được để trống và giá phải khác \"0\",hãy nhập lại: ");
+                inputPrice = sc.nextLine();
+            } else {
+                checkPrice = false;
             }
-            this.importPrice = Float.parseFloat(inputPrice);
-            System.out.println("Số lượng:");
-            this.quantity = Integer.parseInt(sc.nextLine());
-            System.out.println("Mô tả:");
-            this.descriptions = sc.nextLine();
-            System.out.println("Trạng thái sản phẩm:");
-            this.productStatus = Boolean.parseBoolean(sc.nextLine());
         }
-
-        public void calExportPrice () {
-            this.exportPrice = this.importPrice * 1.2F;
-        }
-
-        public void displayData () {
-            System.out.printf("|   %-12s|     %-15s|     %-10s|  %-13s|  %-13s| %-9s|    %-16s| %-14s|    %-11s|\n", this.productId, this.productName, this.title, this.importPrice,
-                    this.exportPrice, this.quantity, this.descriptions, this.productStatus, this.catalog.catalogName);
-            System.out.println("+----------------------------------------------------------------------------------------------------------------------------------------------------+\n");
-        }
+        this.importPrice = Float.parseFloat(inputPrice);
+        System.out.println("Số lượng:");
+        this.quantity = Integer.parseInt(sc.nextLine());
+        System.out.println("Mô tả:");
+        this.descriptions = sc.nextLine();
+        System.out.println("Trạng thái sản phẩm:");
+        this.productStatus = Boolean.parseBoolean(sc.nextLine());
     }
+
+    public void calExportPrice() {
+        this.exportPrice = this.importPrice * 1.2F;
+    }
+
+    public void displayData() {
+        System.out.printf("|   %-12s|     %-15s|     %-10s|  %-13s|  %-13s| %-9s|    %-16s| %-14s|    %-11s|\n", this.productId, this.productName, this.title, this.importPrice,
+                this.exportPrice, this.quantity, this.descriptions, this.productStatus, this.catalog.catalogName);
+        System.out.println("+----------------------------------------------------------------------------------------------------------------------------------------------------+\n");
+    }
+}
 
 
